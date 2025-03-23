@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trackify</title>
+    <style>
+      /* General body styling */
+body {
+    background-color:rgb(252, 249, 249); /* Light grey background */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Center align container */
+.align {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Page title styling */
+h1 {
+    font-size: 2rem;
+    color: #333333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form container styling */
+.form {
+    background-color:rgb(184, 225, 236); /* White form background */
+    border-radius: 8px;
+    padding: 30px 25px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Input fields */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+/* Input hover and focus effects */
+input:focus {
+    outline: none;
+    border-color: #4a90e2; /* Blue border focus */
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+/* Form button */
+button {
+    background-color:rgb(0, 4, 9); /* Blue background */
+    color: #ffffff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color:rgba(27, 27, 26, 0.8);
+}
+
+/* Label styling */
+label {
+    font-size: 0.9rem;
+    color: #333333;
+    font-weight: bold;
+}
+
+/* Grid container for consistent layout */
+.grid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.text--center {
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+  margin-top: 20px;
+}
+
+.text--center a {
+  color:rgb(10, 10, 10);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.text--center a:hover {
+  text-decoration: underline;
+}
+
+.text--center svg.icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  fill: #007bff;
+}
+
+.text--center a:focus,
+.text--center a:active {
+  color:rgb(25, 25, 25);
+}
+
+
+/* Responsive layout for smaller devices */
+@media (max-width: 480px) {
+    .form {
+        padding: 20px;
+    }
+    input, button {
+        font-size: 0.9rem;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+}
+
+    </style>
+</head>
+<body class="align">
+    <h1> Login to Trackify</h1>
+
+    <div class="grid">
+      <form method="POST" action="{{ url_for('login') }}" class="form login">
+        <div>
+            <label for="username">Username</label>
+            <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                placeholder="Enter Username" 
+                autocomplete="username" 
+                required>
+        </div>
+    
+        <div>
+            <label for="login__password">Password</label>
+            <input 
+                type="password" 
+                id="login__password" 
+                name="password" 
+                placeholder="Enter Password" 
+                required>
+        </div>
+    
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+    <p class="text--center">Not a member? <a href="/signup">Sign up now</a> <svg class="icon">
+          <use xlink:href="#icon-arrow-right"></use>
+        </svg></p>
+  
+    </div>
+  
+    
+  </body>
+  </html>

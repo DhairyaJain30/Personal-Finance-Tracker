@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income vs Expense Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin-top: 60px; /* Matches the header height */
+            background-image:url('/static/assets/img3.avif');
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            width: 100%;
+            background-color: #000;
+            text-align: center;
+            color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-list ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-list ul li {
+            display: inline;
+        }
+
+        .nav-list ul a {
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: #f9f9f9;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-list ul a:hover {
+            background-color: #444;
+            color: #fff;
+        }
+
+        .charts-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .chart {
+            background: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            flex: 1 1 300px;
+            max-width: 400px;
+        }
+
+        .chart img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Bar chart row */
+        .bar-chart-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        /* Pie chart row */
+        .pie-chart-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Media Query for responsiveness */
+        @media (max-width: 768px) {
+            .charts-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .chart {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="brand">
+                <h1>Trackify</h1>
+            </div>
+            <div class="nav-list">
+                <ul>
+                    <li>Your Expenses</li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bar Chart Section -->
+    <div class="bar-chart-row">
+        <div class="chart">
+            <h3>Income vs Expense</h3>
+            <img src="data:image/png;base64,{{ bar_plot_url }}" alt="Income vs Expense Bar Chart" />
+        </div>
+    </div>
+
+    <!-- Pie Charts Section -->
+    <div class="pie-chart-row">
+        <div class="chart">
+            <h3>Income Category-wise Breakdown</h3>
+            <img src="data:image/png;base64,{{ pie_plot_url_i }}" alt="Income Category Breakdown Pie Chart" />
+        </div>
+        <div class="chart">
+            <h3>Expense Category-wise Breakdown</h3>
+            <img src="data:image/png;base64,{{ pie_plot_url_e }}" alt="Expense Category Breakdown Pie Chart" />
+        </div>
+    </div>
+</body>
+</html>

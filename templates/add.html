@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense</title>
+    <style>
+        body {
+            
+            background-size: cover;
+            background-position: center;
+            color: #f9f9f9;
+            font-family: 'Lora', serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding-top: 180px; /* Increased padding to create more space between header and content */
+        }
+        
+        
+        header {
+            width: 100%;
+            background-color: #292929;
+            text-align: center;
+            color: rgb(250, 242, 242);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            padding: 10px 0;
+        }
+        
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .brand h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-family: 'Poppins', sans-serif;
+            color: #f9f9f9;
+        }
+        
+        .nav-list {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-list ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-list ul li {
+            display: inline;
+        }
+        
+        .nav-list ul a {
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: #f9f9f9;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .nav-list ul a:hover {
+            background-color: #444;
+        }
+        
+        form {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .caption {
+            text-align: center;
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            color: rgb(13, 13, 13);
+            margin-top: 0; /* Removed unnecessary margin-top */
+            margin-bottom: 30px; /* Added space between the caption and the form */
+        }
+        
+        label {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #333;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        input:focus, select:focus, button:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        button {
+            background-color:rgb(12, 12, 12);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            padding: 10px;
+        }
+        
+        button:hover {
+            background-color:rgb(189, 16, 16);
+        }
+        
+        button:active {
+            background-color: #004085;
+        }
+        
+        .form-group:last-child {
+            margin-bottom: 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .caption {
+                font-size: 2rem;
+            }
+        
+            .nav-list ul {
+                flex-direction: column;
+            }
+        
+            .nav-list ul li {
+                margin-bottom: 10px;
+            }
+        
+            form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="brand">
+                <h1>Trackify</h1>
+            </div>
+            <div class="nav-list">
+                <ul>
+                    <li><a href="#table">Your Expenses</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div>
+        <div class ="caption">Add Transcation</div>
+        <form method="POST">
+            <!-- CSRF token for security, included by Flask-WTF -->
+            {{ form.hidden_tag() }}
+
+            <!-- Type SelectField -->
+            <div class="form-group">
+                <label for="type">{{ form.type.label }}</label><br>
+                {{ form.type(id="type-select") }} <!-- Renders the dropdown for type -->
+            </div>
+
+            <!-- Category SelectField -->
+            <div class="form-group">
+                <label for="category">{{ form.category.label }}</label><br>
+                {{ form.category(id="category-select") }} <!-- Renders the dropdown for category -->
+            </div>
+
+            <!-- Name StringField -->
+            <div class="form-group">
+                <label for="name">{{ form.name.label }}</label><br>
+                {{ form.name() }} <!-- Renders the input field for name -->
+            </div>
+
+            <!-- Amount IntegerField -->
+            <div class="form-group">
+                <label for="amount">{{ form.amount.label }}</label><br>
+                {{ form.amount() }} <!-- Renders the input field for amount -->
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="button">Add Expense</button>
+            </div>
+        </form>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const typeSelect = document.getElementById("type-select");
+                const categorySelect = document.getElementById("category-select");
+        
+                const categories = {
+                    income: [
+                        { value: " ", text: "Select Category" },
+                        { value: "5", text: "Salary" },
+                        { value: "6", text: "Side Income" },
+                        { value: "7", text: "Others_Income" }
+                    ],
+                    expense: [
+                        { value: " ", text: "Select Category" },
+                        { value: "1", text: "Food" },
+                        { value: "2", text: "Entertainment" },
+                        { value: "3", text: "Travel" },
+                        { value: "4", text: "Rent" },
+                        { value: "8", text: "Others_Expense" }
+                    ]
+                };
+        
+                typeSelect.addEventListener("change", function() {
+                    const selectedType = typeSelect.value === "1" ? "income" : "expense";
+        
+                    // Clear current category options
+                    categorySelect.innerHTML = "";
+        
+                    // Populate category options based on type
+                    categories[selectedType].forEach(category => {
+                        const option = document.createElement("option");
+                        option.value = category.value;
+                        option.textContent = category.text;
+                        categorySelect.appendChild(option);
+                    });
+                });
+        
+                // Trigger change event on load to set the initial categories
+                typeSelect.dispatchEvent(new Event("change"));
+            });
+        </script>
+    </div>
+</body>
+</html>
